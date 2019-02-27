@@ -9,8 +9,43 @@ const rl = readline.createInterface({
 
 
 function pigLatin(word) {
-  answer === word
-  return answer
+  let adjusted = word.toLowerCase().trim()
+  let indexA = adjusted.indexOf('a')
+  let indexE = adjusted.indexOf('e')
+  let indexI = adjusted.indexOf('i')
+  let indexO = adjusted.indexOf('o')
+  let indexU = adjusted.indexOf('u')
+  let eachLetter = adjusted.split("")
+   if (indexA < adjusted.length && indexA > -1) {
+     
+     let adjustedCopy = adjusted.split()
+     let length = adjustedCopy.length
+     let vowelA=  indexA
+     let atVowel = adjusted.slice(vowelA)
+     let leftOver = adjusted.slice(0, vowelA)
+     let final = atVowel + leftOver
+     let apart = final.toString().split("")
+     let ending = apart.push('ay')
+     let together = apart.join('')
+     return together
+
+   } 
+
+
+  
+  
+
+  let letterA = "a"
+  let vowel1 = ['a', 'e', 'i', 'o', 'u']
+  // return wordString
+
+
+  // eachLetter.forEach(letter => {
+  //   if (wordString.indexOf() != vowel1){
+  //     return "true"
+  //   }
+  // });
+
   
 }
 
