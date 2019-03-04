@@ -1,5 +1,6 @@
 'use strict';
 
+
 const assert = require('assert');
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -8,7 +9,7 @@ const rl = readline.createInterface({
 });
 
 
-function rockPaperScissors(hand1, hand2) {
+module.exports = function rockPaperScissors(hand1, hand2) {
   if (hand1 === hand2) {
     return "Tie"
   } else if (hand1 === 'rock') {
@@ -39,7 +40,7 @@ function rockPaperScissors(hand1, hand2) {
 
 
 
-}
+
 
 function getPrompt() {
   rl.question('hand1: ', (answer1) => {
@@ -49,7 +50,7 @@ function getPrompt() {
     });
   });
 }
-
+}
 // Tests
 
 // if (typeof describe === 'function') {
