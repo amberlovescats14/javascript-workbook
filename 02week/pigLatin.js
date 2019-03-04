@@ -15,8 +15,11 @@ function pigLatin(word) {
   let indexI = adjusted.indexOf('i')
   let indexO = adjusted.indexOf('o')
   let indexU = adjusted.indexOf('u')
+  let firstLetter = adjusted.indexOf(0)
+  let vowelArr = ['a', 'e', 'i', 'o', 'u']
   let eachLetter = adjusted.split("")
-   if (indexA < adjusted.length && indexA > -1) {
+
+    if (indexA < adjusted.length && indexA > -1) {
      
      let adjustedCopy = adjusted.split()
      let length = adjustedCopy.length
@@ -68,8 +71,7 @@ function pigLatin(word) {
     let together = apart.join('')
     return together
 
-  } else {
-    if (indexU < adjusted.length && indexU > -1) {
+  } else {if (indexU < adjusted.length && indexU > -1) {
      
       let adjustedCopy = adjusted.split()
       let length = adjustedCopy.length
@@ -82,12 +84,12 @@ function pigLatin(word) {
       let together = apart.join('')
       return together
  
-    } 
+    } }
  
   }
 
   
-}
+
 
 
 function getPrompt() {
