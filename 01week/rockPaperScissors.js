@@ -8,6 +8,8 @@ const rl = readline.createInterface({
 
 // module.exports = 
 function rockPaperScissors(hand1, hand2) {
+  //  hand1 = hand1.toLowerCase().trim()
+  //  hand2 = hand2.toLowerCase().trim()
   if (hand1 === hand2) {
     return "Tie"
   } else if (hand1 === 'rock') {
@@ -85,12 +87,12 @@ function getPrompt() {
     });
     it('should reply incorrect input', () => {
       assert.typeOf(rockPaperScissors(), 'string')
-    })
-    // it('should scrub input to ensure lowercase with "trim"ed whitepace', () => {
-    //   assert.equal(rockPaperScissors('rOcK', ' paper '), "Hand two wins!");
-    //   assert.equal(rockPaperScissors('Paper', 'SCISSORS'), "Hand two wins!");
-    //   assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "Hand one wins!");
-    // });
+    });
+    it('should scrub input to ensure lowercase with "trim"ed whitepace', () => {
+      assert.equal(rockPaperScissors('rOcK', ' paper '), "incorrect input");
+      assert.equal(rockPaperScissors('Paper', 'SCISSORS'), "incorrect input");
+      assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "incorrect input");
+    });
   });
 // }
 //  else {
