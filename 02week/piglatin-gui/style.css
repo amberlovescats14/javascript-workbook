@@ -16,3 +16,48 @@ header{
 p.title {
   margin-top: 3%
 }
+main{
+  background: white;
+  width: 100%;
+  height: 90%;
+  background-image: url(https://olivesanimals.weebly.com/uploads/5/1/4/6/51461719/902679_orig.jpg);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+}
+form{
+  width: 70%;
+  height: 50%;
+  background: rgba(245, 245, 245, 0.541);
+  color: #562135;
+  font-size: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20%;
+}
+#piglatin{
+  width: 70%;
+  height: 20%;
+  margin: 10px auto;
+  font-size: 5vh;
+  text-align: center;
+}
+#submit{
+  border: 2px solid #562135;
+  color: #562135;
+  font-size: 5vh;
+  width: 60%;
+  height: 15%;
+  border-radius: 12px;
+  margin: 20px auto;
+}
+footer{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: #e9b1cd;
+  text-align: center
+}
