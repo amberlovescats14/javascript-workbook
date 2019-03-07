@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Acme');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Acme', sans-serif;
+}
+header{
+  background: 	#e9b1cd;
+  color: #562135;
+  height: 10vh;
+  font-size: 6vh;
+  display: flex;
+  justify-content: center;
+}
+p.title {
+  margin-top: 3%
+}
