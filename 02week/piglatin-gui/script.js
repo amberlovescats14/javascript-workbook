@@ -1,9 +1,8 @@
 var original = document.querySelector("#piglatin")
 var button = document.querySelector("#submit")
 
-function translate() {
-  
-    let word = original.value
+function translate(){
+  let word =document.querySelector("#piglatin").value
     let adjusted = word.toLowerCase().trim()
     let indexA = adjusted.indexOf('a')
     let indexE = adjusted.indexOf('e')
@@ -25,9 +24,12 @@ function translate() {
        let apart = final.toString().split("")
        let ending = apart.push('ay')
        let together = apart.join('')
-       return together
+       document.querySelector("#label").innerHTML = together
+       document.querySelector("#piglatin").reset()
+
   
-     } else if (indexE < adjusted.length && indexE > -1) {
+     } else if 
+     (indexE < adjusted.length && indexE > -1) {
        
       let adjustedCopy = adjusted.split()
       let length = adjustedCopy.length
@@ -38,7 +40,7 @@ function translate() {
       let apart = final.toString().split("")
       let ending = apart.push('ay')
       let together = apart.join('')
-      return together
+      document.querySelector("#label").innerHTML = together
   
     }  else if (indexI < adjusted.length && indexI > -1) {
        
@@ -51,7 +53,7 @@ function translate() {
       let apart = final.toString().split("")
       let ending = apart.push('ay')
       let together = apart.join('')
-      return together
+      document.querySelector("#label").innerHTML = together
   
     } else if (indexO < adjusted.length && indexO > -1) {
        
@@ -64,7 +66,7 @@ function translate() {
       let apart = final.toString().split("")
       let ending = apart.push('ay')
       let together = apart.join('')
-      return together
+      document.querySelector("#label").innerHTML = together
   
     } else {if (indexU < adjusted.length && indexU > -1) {
        
@@ -77,16 +79,12 @@ function translate() {
         let apart = final.toString().split("")
         let ending = apart.push('ay')
         let together = apart.join('')
-        return together
+        document.querySelector("#label").innerHTML = together
    
       } }
-      original.innerHTML = together
     }
   
   
   
-  
-
-
-
 button.addEventListener('click', translate)
+

@@ -26,7 +26,7 @@ main{
   display: flex;
   justify-content: center;
 }
-form{
+#form{
   width: 70%;
   height: 50%;
   background: rgba(245, 245, 245, 0.541);
@@ -60,4 +60,9 @@ footer{
   bottom: 0;
   background: #e9b1cd;
   text-align: center
+}
+@media(min-width: 1000px){
+  #form{
+    margin-top: 10%
+  }
 }
