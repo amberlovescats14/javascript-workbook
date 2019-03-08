@@ -24,7 +24,26 @@ function printBoard() {
 }
 
 function horizontalWin() {
-  // Your code here
+  if (board == [
+    ['X', 'X', 'X'],
+    [' ', ' ', ' '],
+    [' ', ' ', ' ']
+  ]) {
+    return "X wins"
+  } else if (board == [
+    [' ', ' ', ' '],
+    ['X', 'X', 'X'],
+    [' ', ' ', ' ']
+  ]) {
+    return "X wins"
+  } else {
+    board = [
+      [' ', ' ', ' '],
+      [' ', ' ', ' '],
+      ['X', 'X', 'X']
+    ]
+    return "X wins"
+  }
 }
 
 function verticalWin() {
