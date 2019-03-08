@@ -25,8 +25,6 @@ function translate(){
        let ending = apart.push('ay')
        let together = apart.join('')
        document.querySelector("#label").innerHTML = together
-       document.querySelector("#piglatin").reset()
-
   
      } else if 
      (indexE < adjusted.length && indexE > -1) {
@@ -82,9 +80,12 @@ function translate(){
         document.querySelector("#label").innerHTML = together
    
       } }
+      clearInput()
     }
   
-  
+  function clearInput() {
+    document.querySelector("#piglatin").value = ""
+  }
   
 button.addEventListener('click', translate)
 
