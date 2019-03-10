@@ -24,26 +24,12 @@ function printBoard() {
 }
 
 function horizontalWin() {
-  if (board == [
-    ['X', 'X', 'X'],
-    [' ', ' ', ' '],
-    [' ', ' ', ' ']
-  ]) {
-    return "X wins"
-  } else if (board == [
-    [' ', ' ', ' '],
-    ['X', 'X', 'X'],
-    [' ', ' ', ' ']
-  ]) {
-    return "X wins"
-  } else {
-    board = [
-      [' ', ' ', ' '],
-      [' ', ' ', ' '],
-      ['X', 'X', 'X']
-    ]
-    return "X wins"
-  }
+  // if(board[0][0,1,2] === 'X') {
+  //   return "X wins"
+  // }
+  // if (board[0][0] = 'X' && board[0][1] == 'X' && board[0][2] =='X') {
+  //   return "X wins"
+  // } 
 }
 
 function verticalWin() {
@@ -55,11 +41,27 @@ function diagonalWin() {
 }
 
 function checkForWin() {
-  // Your code here
+  if(verticalWin = true){
+    return true
+  } else if (horizontalWin = true){
+    return true
+  } else if(diagonalWin = true){
+    return true
+  } else {
+    return false
+  }
+  
 }
 
 function ticTacToe(row, column) {
-  // Your code here
+  if(playerTurn == 'X'){
+    board[row][column] ='X';
+    playerTurn = 'O'
+  } else {
+    board[row][column] = 'O'
+    playerTurn = 'X'
+  }
+  checkForWin()
 }
 
 function getPrompt() {
@@ -71,7 +73,7 @@ function getPrompt() {
       getPrompt();
     });
   });
-
+    
 }
 
 
