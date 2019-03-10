@@ -20,12 +20,18 @@ function printStacks() {
 }
 
 function movePiece() {
-  // Your code here
+  // stacks[startStack].pop()
+  // var value = stacks[startStack].pop()
+  // stacks[endStack].push(value)
 
 }
 
 function isLegal() {
-  // Your code here
+  // if (value > stacks[endStack].pop()) {
+  //   return "That move is illegal"
+  // } else {
+  //   checkForWin()
+  // }
 
 }
 
@@ -35,7 +41,10 @@ function checkForWin() {
 }
 
 function towersOfHanoi(startStack, endStack) {
-  // Your code here
+  var block = stacks[startStack].pop()
+  var move = stacks[endStack].push(block)
+
+  // return block
 
 }
 
