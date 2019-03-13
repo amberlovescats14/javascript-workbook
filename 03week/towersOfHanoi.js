@@ -19,18 +19,22 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-function movePiece() {
-  let block = stacks[startStack].pop()
-  let move = stacks[endStack].push(block)
+function movePiece(startStack, endStack) {
+  if(isLegal(startStack, endStack)){
+    block = startStack.pop()
+    endStack.push(block)
+  }
 }
 
 function isLegal(startStack, endStack) {
   if((startStack === 'a' || startStack === 'b' || startStack === 'c') && (endStack === 'a' || endStack === 'b' || endStack === 'c')
   ){
-    if(startStack.length-1 > endStack.length-1 ){
+    /////
+    if(endStack.length-1 < startStack.length-1 ){
       return true
-    }
-  } else if(endStack.length === undefined){
+      console.log('hello')
+    }  
+  } else if(endStack.length = undefined){
     return true
   } else {
     return false
