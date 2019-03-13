@@ -31,11 +31,36 @@ function getRandomInt(min, max) {
 function generateHint() {
   // your code here
 }
+const acceptableGuess = (guess) => {
+  if(guess.length === 4){
+  let allLettersLegal = true;
+  const guessArr = guess.split('');
+  guessArr.forEach((letter) => {
+    if(letters.indexOf(letter) == -1){
+      allLettersLegal = false
+    }
+  })
+  return allLettersLegal
+}
+
+}
 
 function mastermind(guess) {
-  solution = 'abcd'; // Comment this out to generate a random solution
-  // your code here
-  // let solution = new Array[4].fill(a)
+  solution = 'abcd'
+//   const acceptableGuess = (guess) => {
+//     if(guess.length === 4){
+//     let allLettersLegal = true;
+//     const guessArr = guess.split('');
+//     guessArr.forEach((letter) => {
+//       if(letters.indexOf(letter) == -1){
+//         allLettersLegal = false
+//       }
+//     })
+//     return allLettersLegal
+//   }
+  
+// }
+acceptableGuess()
 }
 
 
