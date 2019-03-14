@@ -23,24 +23,37 @@ function printBoard() {
   console.log('2 ' + board[2].join(' | '));
 }
 
-function horizontalWin() {
-  // if(board[0][0,1,2] === 'X') {
-  //   return "X wins"
+function horizontalWin(playerTurn) {
+  // var hWin1 = stacks[0]['X','X','X'] 
+  
+  // if(hWin1 != true) {
+  //   return false
+  // } else {
+  
+  //   return true
   // }
-  // if (board[0][0] = 'X' && board[0][1] == 'X' && board[0][2] =='X') {
-  //   return "X wins"
-  // } 
+  if((board[0][0] == 'X') && (board[0][1] == 'X') && (board[0][2] == 'X')){
+    return true
+  } else if (board[1] = ['X','X','X']){
+    return true
+  } else if (board[2] = ['X','X','X']){
+    return true
+  } else {
+    return false
+  } 
 }
 
-function verticalWin() {
-  // Your code here
+function verticalWin(row, column) {
+  if((board[0][1] = 'X') && (board[1][1]) && (board[2][1] = 'X')){
+    return true
+  }
 }
 
 function diagonalWin() {
   // Your code here
 }
 
-function checkForWin() {
+function checkForWin(row, column) {
   if(verticalWin = true){
     return true
   } else if (horizontalWin = true){
