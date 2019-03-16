@@ -77,15 +77,17 @@ function diagonalWin() {
 
 function checkForWin() {
   if(verticalWin()){
+    console.log(`${playerTurn} wins!`)
     return true
   } else if (horizontalWin()){
+    console.log(`${playerTurn} wins!`)
     return true
   } else if(diagonalWin()){
+    console.log(`${playerTurn} wins!`)
     return true
   } else {
     return false
   }
-      console.log(`${playerTurn} wins!`)
 
 }
 
