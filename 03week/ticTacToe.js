@@ -90,16 +90,25 @@ function checkForWin() {
   }
 
 }
-
-function ticTacToe(row, column) {
-  if(playerTurn == 'X'){
-    board[row][column] ='X';
+function movePiece(row, column){
+    playerTurn === 'X'
+    board[row][column] = playerTurn;
+ 
+}
+function whoseTurn() {
+  if (playerTurn === 'X'){
     playerTurn = 'O'
   } else {
-    board[row][column] = 'O'
     playerTurn = 'X'
   }
-  checkForWin()
+}
+function ticTacToe(row, column) {
+  movePiece(row, column)
+  if(checkForWin()){
+    console.log(`${playerTurn} wins!`)
+  } else {
+    whoseTurn()
+  }
 }
 
 function getPrompt() {
