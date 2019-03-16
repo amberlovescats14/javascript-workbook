@@ -102,13 +102,32 @@ function whoseTurn() {
     playerTurn = 'X'
   }
 }
-function ticTacToe(row, column) {
-  movePiece(row, column)
-  if(checkForWin()){
-    console.log(`${playerTurn} wins!`)
+function correctInput(row, column){
+  if(((row === '0') || (row === '1') || (row === '2'))&&((column === '0') ||(column === '1') || (column === '2'))){
+    // console.log(true)
+    return true 
   } else {
-    whoseTurn()
+    // console.log(row + " " + column )
+    // console.log(false)
+    return false
   }
+}
+function isEmpty(row, column) {
+  if(board[row][column] === ' '){
+    return true
+  } else {
+    return false
+  }
+}
+function ticTacToe(row, column) {
+  if(isEmpty(row, column) && correctInput(row,column)){
+  movePiece(row, column)
+    if(checkForWin()){
+  console.log(`${playerTurn} wins!`)
+    }else {
+    whoseTurn()
+    }
+  }else console.log('input invalid')
 }
 
 function getPrompt() {
