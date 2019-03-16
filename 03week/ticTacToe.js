@@ -24,14 +24,15 @@ function printBoard() {
 }
 
 function horizontalWin(playerTurn) {
-  // var hWin1 = stacks[0]['X','X','X'] 
-  
-  // if(hWin1 != true) {
-  //   return false
-  // } else {
-  
-  //   return true
-  // }
+// if(board[0]['X','X','X']){
+//   return true
+// } else if (board[1]['X','X','X']){
+//   return true
+// } else if (board[2]['X','X','X']){
+//   return true
+// } else {
+//   return false
+// }
   if((board[0][0] == 'X') && (board[0][1] == 'X') && (board[0][2] == 'X')){
     return true
   } else if (board[1] = ['X','X','X']){
@@ -43,9 +44,16 @@ function horizontalWin(playerTurn) {
   } 
 }
 
-function verticalWin(row, column) {
-  if((board[0][1] = 'X') && (board[1][1]) && (board[2][1] = 'X')){
+function verticalWin(playerTurn) {
+  if((board[0][0] === 'X') && (board[1][0] === 'X') && (board[2][0] === 'X')) {
     return true
+  }
+  else if((board[0][1] == 'X') && (board[1][1] == 'X') && (board[2][1] == 'X')){
+    return true
+  }   else if((board[0][2] === 'X') && (board[1][2] === 'X') && (board[2][2] === 'X')){
+    return true
+  } else {
+    return false
   }
 }
 
@@ -53,7 +61,7 @@ function diagonalWin() {
   // Your code here
 }
 
-function checkForWin(row, column) {
+function checkForWin(playerTurn) {
   if(verticalWin = true){
     return true
   } else if (horizontalWin = true){
