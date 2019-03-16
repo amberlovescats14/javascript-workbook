@@ -23,28 +23,25 @@ function printBoard() {
   console.log('2 ' + board[2].join(' | '));
 }
 
-function horizontalWin(playerTurn) {
-// if(board[0]['X','X','X']){
-//   return true
-// } else if (board[1]['X','X','X']){
-//   return true
-// } else if (board[2]['X','X','X']){
-//   return true
-// } else {
-//   return false
-// }
-  if((board[0][0] == 'X') && (board[0][1] == 'X') && (board[0][2] == 'X')){
+function horizontalWin() {
+  if((board[0][0] === 'X') && (board[0][1] === 'X') && (board[0][2] === 'X')){
     return true
-  } else if (board[1] = ['X','X','X']){
+  } else if ((board[1][0] === 'X') && (board[1][1] === 'X') && (board[1][2] === 'X')){
     return true
-  } else if (board[2] = ['X','X','X']){
+  } else if ((board[2][0] === 'X') && (board[2][1] === 'X') && (board[2][2] === 'X')){
+    return true
+  } else   if((board[0][0] === 'O') && (board[0][1] === 'O') && (board[0][2] === 'O')){
+    return true
+  } else if ((board[1][0] === 'O') && (board[1][1] === 'O') && (board[1][2] === 'O')){
+    return true
+  } else if ((board[2][0] === 'O') && (board[2][1] === 'O') && (board[2][2] === 'O')){
     return true
   } else {
     return false
   } 
 }
 
-function verticalWin(playerTurn) {
+function verticalWin() {
   if((board[0][0] === 'X') && (board[1][0] === 'X') && (board[2][0] === 'X')) {
     return true
   }
@@ -52,26 +49,44 @@ function verticalWin(playerTurn) {
     return true
   }   else if((board[0][2] === 'X') && (board[1][2] === 'X') && (board[2][2] === 'X')){
     return true
+  }  else if((board[0][0] === 'O') && (board[1][0] === 'O') && (board[2][0] === 'O')) {
+    return true
+  }
+  else if((board[0][1] == 'O') && (board[1][1] == 'O') && (board[2][1] == 'O')){
+    return true
+  }   else if((board[0][2] === 'O') && (board[1][2] === 'O') && (board[2][2] === 'O')){
+    return true
   } else {
     return false
   }
 }
 
 function diagonalWin() {
-  // Your code here
+  if((board[0][0] === 'X') && (board[1][1] === 'X') && (board[2][2] === 'X')){
+  return true
+} else if((board[0][2] === 'X') && (board[1][1] === 'X') && (board[2][0] === 'X')){
+  return true
+} else if((board[0][0] === 'O') && (board[1][1] === 'O') && (board[2][2] === 'O')){
+  return true
+} else if((board[0][2] === 'O') && (board[1][1] === 'O') && (board[2][0] === 'O')){
+  return true
+} else {
+  return false
+}
 }
 
-function checkForWin(playerTurn) {
-  if(verticalWin = true){
+function checkForWin() {
+  if(verticalWin()){
     return true
-  } else if (horizontalWin = true){
+  } else if (horizontalWin()){
     return true
-  } else if(diagonalWin = true){
+  } else if(diagonalWin()){
     return true
   } else {
     return false
   }
-  
+      console.log(`${playerTurn} wins!`)
+
 }
 
 function ticTacToe(row, column) {
