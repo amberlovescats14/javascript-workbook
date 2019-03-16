@@ -29,7 +29,6 @@ function movePiece(startStack, endStack) {
 function isLegal(startStack, endStack) {
   if((startStack === 'a' || startStack === 'b' || startStack === 'c') && (endStack === 'a' || endStack === 'b' || endStack === 'c')
   ){
-    // console.log('hello')
     if(endStack.length-1 < startStack.length-1 ){
       return true
       console.log('hello')
