@@ -20,37 +20,51 @@ function printStacks() {
 }
 
 function movePiece(startStack, endStack) {
-  if(isLegal(startStack, endStack)){
-    block = startStack.pop()
-    endStack.push(block)
-  }
+    let block = stacks[startStack].pop()
+    
+    stacks[endStack].push(block)
+  
 }
 
 function isLegal(startStack, endStack) {
-  if((startStack === 'a' || startStack === 'b' || startStack === 'c') && (endStack === 'a' || endStack === 'b' || endStack === 'c')
+  console.log(stacks[startStack][stacks[startStack].length-1])
+  console.log(stacks[endStack][stacks[endStack].length-1])
+  if((startStack === 'a' || startStack === 'b' || startStack === 'c') && (endStack === 'a' || endStack === 'b'|| endStack === 'c')
   ){
-    if(endStack.length-1 < startStack.length-1 ){
+    if((stacks[startStack][stacks[startStack].length-1] > stacks[endStack][stacks[endStack].length-1]) || (stacks[endStack][stacks[endStack].length] === undefined)){
+      console.log('legal move')
       return true
-      console.log('hello')
-    }  
-   else if(endStack.length === undefined){
-    return true
-  } 
+    }  else if((stacks[startStack][stacks[startStack].length-1]) <(stacks[endStack][stacks[endStack].length-1])){
+      console.log('not legal')
+      return false
+    }
   } else {
-    return false
     console.log('incorrect input')
+    return false
   }
 }
 
-function checkForWin() {
-  // Your code here
+function checkForWin(stacks) {
+  // console.log(stacks)
+  if (stacks === { a: [], b: [], c: [4, 3, 2, 1] }){
+    return true
+  } else {
+    return false
+  }
+
 
 }
 
 function towersOfHanoi(startStack, endStack) {
   if(isLegal(startStack, endStack)){
-      movePiece()
-  } checkForWin()
+      movePiece(startStack, endStack)
+   if(checkForWin(stacks)){
+     console.log('WINNER')
+   }
+  } else {
+    console.log('illegal move')
+  }
+
 
 }
 
