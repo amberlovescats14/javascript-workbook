@@ -27,15 +27,13 @@ function movePiece(startStack, endStack) {
 }
 
 function isLegal(startStack, endStack) {
-  console.log(stacks[startStack][stacks[startStack].length-1])
-  console.log(stacks[endStack][stacks[endStack].length-1])
+  console.log("StartStackValue:" + stacks[startStack][stacks[startStack].length-1])
+  console.log("EndStackValue:" + stacks[endStack][stacks[endStack].length-1])
   if((startStack === 'a' || startStack === 'b' || startStack === 'c') && (endStack === 'a' || endStack === 'b'|| endStack === 'c')
   ){
-    if((stacks[startStack][stacks[startStack].length-1] > stacks[endStack][stacks[endStack].length-1]) || (stacks[endStack][stacks[endStack].length] === undefined)){
-      console.log('legal move')
+    if((stacks[startStack][stacks[startStack].length-1] < stacks[endStack][stacks[endStack].length-1]) || (stacks[endStack][stacks[endStack].length-1] === undefined) ){
       return true
-    }  else if((stacks[startStack][stacks[startStack].length-1]) <(stacks[endStack][stacks[endStack].length-1])){
-      console.log('not legal')
+    }  else {
       return false
     }
   } else {
@@ -44,13 +42,20 @@ function isLegal(startStack, endStack) {
   }
 }
 
-function checkForWin(stacks) {
-  // console.log(stacks)
-  if (stacks === { a: [], b: [], c: [4, 3, 2, 1] }){
-    return true
+function checkForWin(startStack, endStack) {
+  console.log('c stack', stacks[endStack])
+  if((stacks['b']).length
+     === 4){
+    return true 
   } else {
-    return false
+    return false 
   }
+  // // console.log(stacks)
+  // if (stacks === { a: [], b: [], c: [4, 3, 2, 1] }){
+  //   return true
+  // } else {
+  //   return false
+  // }
 
 
 }
@@ -58,7 +63,7 @@ function checkForWin(stacks) {
 function towersOfHanoi(startStack, endStack) {
   if(isLegal(startStack, endStack)){
       movePiece(startStack, endStack)
-   if(checkForWin(stacks)){
+   if(checkForWin(startStack, endStack)){
      console.log('WINNER')
    }
   } else {
