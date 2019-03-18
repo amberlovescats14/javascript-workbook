@@ -18,49 +18,53 @@ function printBoard() {
 }
 
 function generateSolution() {
-  for (let i = 0; i < 4; i++) {
-    const randomIndex = getRandomInt(0, letters.length);
-    solution += letters[randomIndex];
-  }
+  let myStr = Math.random().toString(36).substr(2, 4)
+  let letters = myStr.replace('\/d/g','\[a-z]/g')
+
 }
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
+// function getRandomInt(min, max) {
+//   // return Math.floor(Math.random() * (max - min)) + min;
+// }
 
 function generateHint() {
   // your code here
 }
+
+
 const acceptableGuess = (guess) => {
-  if(guess.length === 4){
-  let allLettersLegal = true;
-  const guessArr = guess.split('');
-  guessArr.forEach((letter) => {
-    if(letters.indexOf(letter) == -1){
-      allLettersLegal = false
-    }
-  })
-  return allLettersLegal
-}
+  let letterReg = new RegExp(/[a-z]{4}/is)
+  if(letterReg.test(guess)){
+    console.log('true')
+    return true
+  } else {
+    console.log('false')
+    return false
+  }
+
+
+//   if(guess.length === 4){
+//   let allLettersLegal = true;
+//   const guessArr = guess.split('');
+//   guessArr.forEach((letter) => {
+//     if(letters.indexOf(letter) == -1){
+//       allLettersLegal = false
+//     }
+//   })
+//   return allLettersLegal
+// }
 
 }
 
 function mastermind(guess) {
-  solution = 'abcd'
-//   const acceptableGuess = (guess) => {
-//     if(guess.length === 4){
-//     let allLettersLegal = true;
-//     const guessArr = guess.split('');
-//     guessArr.forEach((letter) => {
-//       if(letters.indexOf(letter) == -1){
-//         allLettersLegal = false
-//       }
-//     })
-//     return allLettersLegal
-//   }
-  
-// }
-acceptableGuess()
+ 
+ if(acceptableGuess(guess)){
+  console.log('made it')
+ } else {
+   console.log('fail')
+ }
+ 
+
 }
 
 
