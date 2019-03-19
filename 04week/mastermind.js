@@ -9,59 +9,68 @@ const rl = readline.createInterface({
 
 let board = [];
 let solution = '';
-let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+// let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
 function printBoard() {
   for (let i = 0; i < board.length; i++) {
-    console.log(board[i]);
+    // console.log(board[i]);
   }
 }
 
 function generateSolution() {
   let myStr = Math.random().toString(36).substr(2, 4)
-  let letters = myStr.replace('\/d/g','\[a-z]/g')
+  letters = myStr.replace('\/d/g','\[a-z]/g')
 
 }
+////VARIABLES 
+let letters = ""
+let correctLetters = 0
+let correctSpot = 0
+let numberOfGuesses = 0
+//////
 
-// function getRandomInt(min, max) {
-//   // return Math.floor(Math.random() * (max - min)) + min;
-// }
-
-function generateHint() {
-  // your code here
+function generateHint(guess) {
+  correctLetters = 0
+  correctSpot = 0
+  for(let i = 0; i < letters.length; i++){
+    for(let g = 0; g < guess.length; g++){
+      if(guess[g] === letters[i]){
+        correctLetters++
+      } 
+    }
+    if(letters[i] === guess[i]){
+      correctSpot++
+    }
+  }
+  return `Hints: CorrectSpot: ${correctSpot} , CorrectLetters: ${correctLetters}`
 }
 
 
 const acceptableGuess = (guess) => {
   let letterReg = new RegExp(/[a-z]{4}/is)
   if(letterReg.test(guess)){
-    console.log('true')
     return true
   } else {
-    console.log('false')
     return false
   }
-
-
-//   if(guess.length === 4){
-//   let allLettersLegal = true;
-//   const guessArr = guess.split('');
-//   guessArr.forEach((letter) => {
-//     if(letters.indexOf(letter) == -1){
-//       allLettersLegal = false
-//     }
-//   })
-//   return allLettersLegal
-// }
 
 }
 
 function mastermind(guess) {
  
  if(acceptableGuess(guess)){
-  console.log('made it')
+  generateHint(guess)
+  if(guess === letters){
+    console.log('You guessed it!')
+    return 'You guessed it!'
+  } else {
+    numberOfGuesses++
+    if(numberOfGuesses === 10){
+      console.log('Sorry you lost')
+    }
+  }
  } else {
-   console.log('fail')
+   console.log('Unacceptable guess')
  }
  
 
@@ -79,24 +88,20 @@ function getPrompt() {
 // Tests
 
 if (typeof describe === 'function') {
-  solution = 'abcd';
-  describe('#mastermind()', () => {
+  letters = 'abcd';
+  
+  describe('#generateHint(guess)', () => {
     it('should register a guess and generate hints', () => {
       mastermind('aabb');
-      assert.equal(board.length, 1);
-    });
-    it('should be able to detect a win', () => {
-      assert.equal(mastermind(solution), 'You guessed it!');
+      assert.equal(generateHint("aebf"), `Hints: CorrectSpot: 1 , CorrectLetters: 2`);
     });
   });
 
-  describe('#generateHint()', () => {
-    it('should generate hints', () => {
-      assert.equal(generateHint('abdc'), '2-2');
+  describe('#mastermind()', () => {
+    it('should detect a win', () => {
+      assert.equal(mastermind('abcd'), 'You guessed it!');
     });
-    it('should generate hints if solution has duplicates', () => {
-      assert.equal(generateHint('aabb'), '1-1');
-    });
+    
 
   });
 
