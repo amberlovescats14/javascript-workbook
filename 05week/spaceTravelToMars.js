@@ -8,8 +8,44 @@ let jobTypes = {
   commander: 'Main Ship',
   programmer: 'Any Ship!'
 };
+class CrewMember {
+  constructor(name, job, specialSkill, ship){
+    this.name = name;
+    this.job = job;
+    this.specialSkill = specialSkill;
+    this.ship = ship;
+  }
+  enterShip(ship){
+    this.ship = ship
+    ship.crew.push(this)
+  }
+}
+class Ship {
+  constructor(name, type, ability){
+    this.name = name;
+    this.type = type;
+    this.ability = ability;
+    this.crew = [];
+  }
+  missionStatement(){
+    if(this.crew.length === 0){
+      return "Can't perform a mission yet."
+    } else {
+      return this.ability
+    }
+  }
+}
+class MissionStatement extends Ship {
+  constructor(missionStatement, name, type, ability, crew){
+  super(name, type, ability, crew);
+  this.missionStatement = missionStatement }
+  missionStatement(){
+    return this.missionStatement
+  }
+}
+const crewMember1 =  new CrewMember('Rick Martinez', 'pilot', 'chemistry')
 
-// Your code here
+
 
 //tests
 if (typeof describe === 'function'){
