@@ -35,14 +35,14 @@ class Ship {
     }
   }
 }
-class MissionStatement extends Ship {
-  constructor(missionStatement, name, type, ability, crew){
-  super(name, type, ability, crew);
-  this.missionStatement = missionStatement }
-  missionStatement(){
-    return this.missionStatement
-  }
-}
+// class MissionStatement extends Ship {
+//   constructor(missionStatement, name, type, ability, crew){
+//   super(name, type, ability, crew);
+//   this.missionStatement = missionStatement }
+//   missionStatement(){
+//     return this.missionStatement
+//   }
+// }
 const crewMember1 =  new CrewMember('Rick Martinez', 'pilot', 'chemistry')
 
 
