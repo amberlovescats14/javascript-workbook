@@ -8,13 +8,66 @@ const rl = readline.createInterface({
 });
 
 
-function Checker() {
-  // Your code here
+class Checker {
+  constructor(color){
+    if(color === 'red'){
+      this.symbol = 'R'
+    } else {
+      color === 'black'
+      this.symbol = 'B'
+    }
+  }
 }
 
 class Board {
   constructor() {
-    this.grid = []
+    this.checkers = [];
+    this.grid = [];
+  }
+  setBoard(){
+    const redPieces = [
+      [0,1],
+      [0,3],
+      [0,5],
+      [0,7],
+      [1,0],
+      [1,2],
+      [1,4],
+      [1,6],
+      [2,1],
+      [2,3],
+      [2,5],
+      [2,7]
+    ];
+    for(let i=0; i < 12; i++){
+      const redRow = redPieces[i][0];
+      const redColumn = redPieces[i][1];
+      const red = new Checker('red');
+      this.checkers.push(red);
+      this.grid[redRow][redColumn] = red;
+    }
+      const blackPieces = [
+        [5,0],
+        [5,2],
+        [5,4],
+        [5,6],
+        [6,1],
+        [6,3],
+        [6,5],
+        [6,7],
+        [7,0],
+        [7,2],
+        [7,4],
+        [7,6]
+      ];
+      for(let i=0; i < 12; i++){
+        const blackRow = blackPieces[i][0];
+        const blackColumn = blackPieces[i][1];
+        const black = new Checker('black');
+        this.checkers.push(black);
+        this.grid[blackRow][blackColumn] = black;
+  
+    }
   }
   // method that creates an 8x8 array, filled with null values
   createGrid() {
@@ -37,11 +90,17 @@ class Board {
       for (let column = 0; column < 8; column++) {
         // if the location is "truthy" (contains a checker piece, in this case)
         if (this.grid[row][column]) {
+
           // push the symbol of the check in that location into the array
           rowOfCheckers.push(this.grid[row][column].symbol);
-        } else {
+        } 
+        // else if (this.grid[row]+[column] % 2 === 0){
+        //   rowOfCheckers.push(this.blackPiece)
+        // }
+        else {
           // just push in a blank space
-          rowOfCheckers.push(' ');
+         
+          rowOfCheckers.push('')
         }
       }
       // join the rowOfCheckers array to a string, separated by a space
@@ -51,9 +110,23 @@ class Board {
     }
     console.log(string);
   }
+  selectChecker(whichPiece) {
+    let reg = new RegExp(/[0-7]{2}/g)
+    let testing = reg.test(whichPiece)
+    if(testing){
+      console.log(true)
+      return true
+    } else {
+      console.log(false)
+      return false
+    }
+  }
 
-  // Your code here
-}
+
+ }
+//// making a variable so I can call functions later
+let b = new Board
+
 
 class Game {
   constructor() {
@@ -61,6 +134,14 @@ class Game {
   }
   start() {
     this.board.createGrid();
+    this.board.setBoard();
+    if(b.selectChecker()){
+      moveChecker()
+    }
+  } 
+  moveChecker(whichPiece) {
+    console.log('')
+    
   }
 }
 
