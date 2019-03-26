@@ -23,7 +23,12 @@ class Board {
   constructor() {
     this.checkers = [];
     this.grid = [];
+    this.piece = whichPiece 
+    this.black = 'B'
+    this.red = 'R'
+    this.startPiece = this.black
   }
+  //attributes for the whole board and the array where the pieces are located
   setBoard(){
     const redPieces = [
       [0,1],
@@ -41,10 +46,15 @@ class Board {
     ];
     for(let i=0; i < 12; i++){
       const redRow = redPieces[i][0];
+      //running through the nested array, i stands for each array, 0 is the position of the number I am looking for
       const redColumn = redPieces[i][1];
+      //again i runs each of the nested array and returns them in the 1 position
       const red = new Checker('red');
+      // new instance of checker.piece
       this.checkers.push(red);
+      //pushing the correct piece into the array
       this.grid[redRow][redColumn] = red;
+      //now we are using the stored data to put the pieces into the board array
     }
       const blackPieces = [
         [5,0],
@@ -110,18 +120,33 @@ class Board {
     }
     console.log(string);
   }
+  // whoseTurn(startPiece){
+  //   let startPiece = this.black
+  //   startPiece === this.black ? this.red : this.black
+  //   console.log(startPiece)
+  // }
+  switchPlayers(playerTurn){
+    let playerTurn = this.startPiece
+    playerTurn === this.black ? playerTurn = this.red : playerTurn = this.black
+  }
   selectChecker(whichPiece) {
-    let reg = new RegExp(/[0-7]{2}/g)
-    let testing = reg.test(whichPiece)
-    if(testing){
+    let start = whichPiece.split('')
+    console.log(start)
+    let startRow = start[0]
+    let startCol = start[1]
+    const startPiece = this.grid[startRow][startColumn]
+    if (((startPiece === this.red) &&(this.turn === this.red)) || ((startPiece === this.black) && (startPiece === this.black))){
       console.log(true)
       return true
     } else {
       console.log(false)
       return false
     }
+    // let reg = new RegExp(/[0-7]{2}/g)
+    // let testing = reg.test(whichPiece)
+    
+    //if the input is two numbers between 00-77, it will return true and continue, or return false
   }
-
 
  }
 //// making a variable so I can call functions later
@@ -139,10 +164,10 @@ class Game {
       moveChecker()
     }
   } 
-  moveChecker(whichPiece) {
-    console.log('')
+  // moveChecker() {
+  //   console.log('')
     
-  }
+  // }
 }
 
 function getPrompt() {
