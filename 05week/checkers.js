@@ -23,10 +23,10 @@ class Board {
   constructor() {
     this.checkers = [];
     this.grid = [];
-    this.piece = whichPiece 
+    // this.piece = whichPiece 
     this.black = 'B'
     this.red = 'R'
-    this.startPiece = this.black
+    this.turn = this.black
   }
   //attributes for the whole board and the array where the pieces are located
   setBoard(){
@@ -126,16 +126,48 @@ class Board {
   //   console.log(startPiece)
   // }
   switchPlayers(playerTurn){
-    let playerTurn = this.startPiece
-    playerTurn === this.black ? playerTurn = this.red : playerTurn = this.black
+    playerTurn = this.turn;
+    playerTurn === this.black ? playerTurn = this.red : playerTurn = this.black;
   }
+
+
+
+ }
+//// making a variable so I can call functions later
+// let b = new Board
+// let c = new Checker
+
+
+class Game {
+  constructor() {
+    this.board = new Board;
+  }
+  start() {
+    this.board.createGrid();
+    this.board.setBoard();
+  } 
+
+  moveChecker(whichPiece, toWhere) {
+    if(this.selectChecker(whichPiece)){
+      let start = whichPiece.split('')
+      let startRow = start[0]
+      let startCol = start[1]
+      let endSpot = toWhere.split('')
+      let endColumn = endSpot[0]
+      let endRow = endSpot[0]
+      const movingPiece = this.board.grid[startRow][startCol]
+      this.board.grid[endRow][endColumn] = movingPiece
+      
+    } 
+  }
+
   selectChecker(whichPiece) {
-    let start = whichPiece.split('')
-    console.log(start)
-    let startRow = start[0]
-    let startCol = start[1]
-    const startPiece = this.grid[startRow][startColumn]
-    if (((startPiece === this.red) &&(this.turn === this.red)) || ((startPiece === this.black) && (startPiece === this.black))){
+    let start = whichPiece.split('');
+    let startRow = start[0];
+    let startCol = start[1];
+    console.log('board', this.board)
+    const startPiece = this.board.grid[startRow][startCol]
+    if (((startPiece.symbol === this.board.red) &&(this.board.turn === this.board.red)) || ((startPiece.symbol === this.board.black) && (startPiece.symbol === this.board.black))){
       console.log(true)
       return true
     } else {
@@ -148,26 +180,10 @@ class Board {
     //if the input is two numbers between 00-77, it will return true and continue, or return false
   }
 
- }
-//// making a variable so I can call functions later
-let b = new Board
 
-
-class Game {
-  constructor() {
-    this.board = new Board;
+  isValid(){
+    console.log('isValid')
   }
-  start() {
-    this.board.createGrid();
-    this.board.setBoard();
-    if(b.selectChecker()){
-      moveChecker()
-    }
-  } 
-  // moveChecker() {
-  //   console.log('')
-    
-  // }
 }
 
 function getPrompt() {
