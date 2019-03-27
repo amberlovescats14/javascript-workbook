@@ -174,15 +174,14 @@ class Game {
       console.log(false)
       return false
     }
-    // let reg = new RegExp(/[0-7]{2}/g)
-    // let testing = reg.test(whichPiece)
     
     //if the input is two numbers between 00-77, it will return true and continue, or return false
   }
 
 
-  isValid(){
-    console.log('isValid')
+  isValid(whichPiece){
+    let reg = new RegExp(/[0-7]{2}/g)
+    let testing = reg.test(whichPiece)
   }
 }
 
