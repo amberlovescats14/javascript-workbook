@@ -125,10 +125,7 @@ class Board {
   //   startPiece === this.black ? this.red : this.black
   //   console.log(startPiece)
   // }
-  switchPlayers(playerTurn){
-    playerTurn = this.turn;
-    playerTurn === this.black ? playerTurn = this.red : playerTurn = this.black;
-  }
+
 
 
 
@@ -141,13 +138,17 @@ class Board {
 class Game {
   constructor() {
     this.board = new Board;
+    this.black = 'B'
+    this.red = 'R'
+    this.playerTurn = this.black
   }
   start() {
     this.board.createGrid();
     this.board.setBoard();
   } 
 
-  moveChecker(whichPiece, toWhere) {
+  moveChecker(whichPiece, toWhere, playerTurn) {
+    if(this.isValid(whichPiece)){
     if(this.selectChecker(whichPiece)){
       let start = whichPiece.split('')
       let startRow = start[0]
@@ -157,31 +158,47 @@ class Game {
       let endRow = endSpot[0]
       const movingPiece = this.board.grid[startRow][startCol]
       this.board.grid[endRow][endColumn] = movingPiece
-      
+    }
     } 
+    this.switchPlayers(playerTurn)
+
   }
 
   selectChecker(whichPiece) {
     let start = whichPiece.split('');
     let startRow = start[0];
     let startCol = start[1];
-    console.log('board', this.board)
+    // console.log('board', this.board)
     const startPiece = this.board.grid[startRow][startCol]
     if (((startPiece.symbol === this.board.red) &&(this.board.turn === this.board.red)) || ((startPiece.symbol === this.board.black) && (startPiece.symbol === this.board.black))){
       console.log(true)
       return true
     } else {
-      console.log(false)
-      return false
+      console.log('Not your turn!')
+      /////******** */ isn't reading symbol of null
+      // if((startPiece.symbol === null) && ((this.board.turn === this.board.red) || (this.board.turn === this.board.black))){
+      // console.log(false)
+      // return false
+      // }
     }
     
-    //if the input is two numbers between 00-77, it will return true and continue, or return false
   }
 
 
   isValid(whichPiece){
     let reg = new RegExp(/[0-7]{2}/g)
     let testing = reg.test(whichPiece)
+    if(testing){
+      return true
+    } else {
+      console.log('incorrect input')
+      return false
+    }
+  }
+  switchPlayers(playerTurn){
+    playerTurn = this.turn;
+    playerTurn === this.black ? playerTurn = this.red : playerTurn = this.black;
+    console.log(`Player ${playerTurn}'s turn`)
   }
 }
 
