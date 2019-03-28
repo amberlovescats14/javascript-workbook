@@ -7,10 +7,11 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+// let playerTurn = 'B';
 
 class Checker {
-  constructor(color){
-    if(color === 'red'){
+  constructor(color) {
+    if (color === 'red') {
       this.symbol = 'R'
     } else {
       color === 'black'
@@ -26,25 +27,25 @@ class Board {
     // this.piece = whichPiece 
     this.black = 'B'
     this.red = 'R'
-    this.turn = this.black
+    this.turn = this.black;
   }
   //attributes for the whole board and the array where the pieces are located
-  setBoard(){
+  setBoard() {
     const redPieces = [
-      [0,1],
-      [0,3],
-      [0,5],
-      [0,7],
-      [1,0],
-      [1,2],
-      [1,4],
-      [1,6],
-      [2,1],
-      [2,3],
-      [2,5],
-      [2,7]
+      [0, 1],
+      [0, 3],
+      [0, 5],
+      [0, 7],
+      [1, 0],
+      [1, 2],
+      [1, 4],
+      [1, 6],
+      [2, 1],
+      [2, 3],
+      [2, 5],
+      [2, 7]
     ];
-    for(let i=0; i < 12; i++){
+    for (let i = 0; i < 12; i++) {
       const redRow = redPieces[i][0];
       //running through the nested array, i stands for each array, 0 is the position of the number I am looking for
       const redColumn = redPieces[i][1];
@@ -56,27 +57,27 @@ class Board {
       this.grid[redRow][redColumn] = red;
       //now we are using the stored data to put the pieces into the board array
     }
-      const blackPieces = [
-        [5,0],
-        [5,2],
-        [5,4],
-        [5,6],
-        [6,1],
-        [6,3],
-        [6,5],
-        [6,7],
-        [7,0],
-        [7,2],
-        [7,4],
-        [7,6]
-      ];
-      for(let i=0; i < 12; i++){
-        const blackRow = blackPieces[i][0];
-        const blackColumn = blackPieces[i][1];
-        const black = new Checker('black');
-        this.checkers.push(black);
-        this.grid[blackRow][blackColumn] = black;
-  
+    const blackPieces = [
+      [5, 0],
+      [5, 2],
+      [5, 4],
+      [5, 6],
+      [6, 1],
+      [6, 3],
+      [6, 5],
+      [6, 7],
+      [7, 0],
+      [7, 2],
+      [7, 4],
+      [7, 6]
+    ];
+    for (let i = 0; i < 12; i++) {
+      const blackRow = blackPieces[i][0];
+      const blackColumn = blackPieces[i][1];
+      const black = new Checker('black');
+      this.checkers.push(black);
+      this.grid[blackRow][blackColumn] = black;
+
     }
   }
   // method that creates an 8x8 array, filled with null values
@@ -103,13 +104,13 @@ class Board {
 
           // push the symbol of the check in that location into the array
           rowOfCheckers.push(this.grid[row][column].symbol);
-        } 
+        }
         // else if (this.grid[row]+[column] % 2 === 0){
         //   rowOfCheckers.push(this.blackPiece)
         // }
         else {
           // just push in a blank space
-         
+
           rowOfCheckers.push('')
         }
       }
@@ -129,7 +130,7 @@ class Board {
 
 
 
- }
+}
 //// making a variable so I can call functions later
 // let b = new Board
 // let c = new Checker
@@ -138,29 +139,38 @@ class Board {
 class Game {
   constructor() {
     this.board = new Board;
+    // this.black = 'B'
+    // this.red = 'R'
     this.black = 'B'
     this.red = 'R'
-    this.playerTurn = this.black
+    this.turn = this.black;
+
   }
   start() {
     this.board.createGrid();
     this.board.setBoard();
-  } 
+  }
 
-  moveChecker(whichPiece, toWhere, playerTurn) {
-    if(this.isValid(whichPiece)){
-    if(this.selectChecker(whichPiece)){
-      let start = whichPiece.split('')
-      let startRow = start[0]
-      let startCol = start[1]
-      let endSpot = toWhere.split('')
-      let endColumn = endSpot[0]
-      let endRow = endSpot[0]
-      const movingPiece = this.board.grid[startRow][startCol]
-      this.board.grid[endRow][endColumn] = movingPiece
+  moveChecker(whichPiece, toWhere) {
+    // console.log('top of moveChecker', playerTurn)
+    if (this.isValid(whichPiece)) {
+      if (this.oneSpace(whichPiece, toWhere)) {
+        if (this.selectChecker(whichPiece)) {
+          let start = whichPiece.split('')
+          let startRow = start[0]
+          let startCol = start[1]
+          let endSpot = toWhere.split('')
+          let endColumn = endSpot[1]
+          let endRow = endSpot[0]
+          const movingPiece = this.board.grid[startRow][startCol];
+          this.board.grid[endRow][endColumn] = movingPiece;
+          this.board.grid[startRow][startCol] = null;
+          console.log("hello");
+          
+        }
+      }
     }
-    } 
-    this.switchPlayers(playerTurn)
+    this.switchPlayers();
 
   }
 
@@ -170,35 +180,53 @@ class Game {
     let startCol = start[1];
     // console.log('board', this.board)
     const startPiece = this.board.grid[startRow][startCol]
-    if (((startPiece.symbol === this.board.red) &&(this.board.turn === this.board.red)) || ((startPiece.symbol === this.board.black) && (startPiece.symbol === this.board.black))){
-      console.log(true)
+    console.log("playerTurn:" + this.turn)
+    if (((startPiece.symbol === this.red) && (this.turn === this.red)) || ((startPiece.symbol=== this.black) && (this.turn  === this.black))) {
       return true
     } else {
       console.log('Not your turn!')
+      console.log("startPiece:" + startPiece.symbol)
+      console.log("playerTurn:" + this.turn)
+      return false
       /////******** */ isn't reading symbol of null
       // if((startPiece.symbol === null) && ((this.board.turn === this.board.red) || (this.board.turn === this.board.black))){
       // console.log(false)
       // return false
       // }
     }
-    
+
   }
 
 
-  isValid(whichPiece){
+  isValid(whichPiece) {
     let reg = new RegExp(/[0-7]{2}/g)
     let testing = reg.test(whichPiece)
-    if(testing){
+    if (testing) {
       return true
     } else {
       console.log('incorrect input')
       return false
     }
   }
-  switchPlayers(playerTurn){
-    playerTurn = this.turn;
-    playerTurn === this.black ? playerTurn = this.red : playerTurn = this.black;
-    console.log(`Player ${playerTurn}'s turn`)
+  switchPlayers() {
+     return (this.turn === this.black) ? this.turn = this.red : this.turn = this.black;
+    
+    console.log(`Player ${this.turn}'s turn`)
+  }
+  oneSpace(whichPiece, toWhere) {
+    let start = whichPiece.split('')
+    let startRow = start[0]
+    let startCol = start[1]
+    let endSpot = toWhere.split('')
+    let endColumn = endSpot[1]
+    let endRow = endSpot[0]
+    const movingPiece = this.board.grid[startRow][startCol]
+    if (this.board.grid[endRow][endColumn] === null) {
+      // console.log('in oneSpace', this.board.grid[endRow][endColumn])
+      return true
+    } else {
+      console.log('cannot move here')
+    }
   }
 }
 
