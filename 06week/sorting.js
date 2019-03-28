@@ -3,108 +3,133 @@ const strNums = ["1","4","1","5","9","2","6","5","3","5","8","9","7","9","3","2"
 // Given 1000 digits of PI as strings, return an array of the digits as numbers
 let newArray = []
 const stringsToNumbs = (numbers) => {
-  let allOne = numbers.toString()
-  newArray.push(allOne)
+  let allOne = numbers.toString();
+  newArray.push(allOne);
+  console.log(newArray)
   return newArray;
+
 }
 
-let ret1 = stringsToNumbs(strNums);
-// console.log(ret1)
+stringsToNumbs(strNums);
+//This string returns a array with a single string of numbers
+///new ARRAY HOLDS THE STRING WITHOUT QUOTES
+
+/////////////////////////////////////////
 /////////////////////////////////////////
 // // With the same numbers, find the sum of the even values
-// const sumEvens;
-
-const evens = (arr) => {
-  let total = 0
-  for(let i=0; i < arr.length; i++){
-    if(arr[i] % 2 === 0){
-      total += array[i]
-      console.log('hello')
-    } 
-  } 
-  return total;
+let total = 0
+const sumEvens = (array) => {
+  for(let i=0; i < array.length; i++){
+    parseInt(array[i])
+    if(array[i] % 2 === 0){
+      total += parseInt(array[i])
+    }
+  }
+  console.log("total:" + total)
 }
-let ret = evens(ret1);
-console.log('evens' + ret)
+
+sumEvens(strNums)
+/////////////////////////////
+/////////////////////////////
+// Find the index of the first value when added to it's index = 512 (#ATX!!)
+const atxIdx = (array) => {
+  for(let i=0; i < array.length; i++){
+    let eye = array[i];
+    let indexEye = array.indexOf(array[i]);
+    if(eye + indexEye == 512){
+      console.log('made it')
+      // console.log(`number ${eye} + index ${indexEye}`);
+
+    } 
+  }
+}
+atxIdx(strNums)
+
+  
+
+  ////////////////it doesnt exist *** I cant figure out how to get them to add instead of concat
+  ////////////////
 
 
-// console.log(sumEvens);
 
-// // Find the index of the first value when added to it's index = 512 (#ATX!!)
-// const atxIdx;
-
-// console.log(`index: ${atxIdx}, value: ${nums[atxIdx]}`);
-
-// const weather = [
-//   { id: 5743823523151872,
-//     weather_state_name: "Light Cloud",
-//     weather_state_abbr: "lc",
-//     wind_direction_compass: "NNE",
-//     created: "2018-07-11T20:53:03.251710Z",
-//     applicable_date: "2018-07-11",
-//     min_temp: 14.43,
-//     max_temp: 23.36,
-//     the_temp: 22.785,
-//     wind_speed: 5.682503989556987,
-//     wind_direction: 21.6264939172659,
-//     air_pressure: 1024.45,
-//     humidity: 58,
-//     visibility: 8.683041040324504,
-//     predictability: 70
-//   },
-//   { id: 6188149969518592,
-//     weather_state_name: "Heavy Cloud",
-//     weather_state_abbr: "hc",
-//     wind_direction_compass: "NE",
-//     created: "2018-07-11T20:53:03.268190Z",
-//     applicable_date: "2018-07-12",
-//     min_temp: 14.81,
-//     max_temp: 25.52,
-//     the_temp: 24.61,
-//     wind_speed: 3.2461141472739206,
-//     wind_direction: 42.72552812997726,
-//     air_pressure: 1024.605,
-//     humidity: 54,
-//     visibility: 10.633835898353615,
-//     predictability: 71
-//   },
-//   { id: 5742049676492800,
-//     weather_state_name: "Showers",
-//     weather_state_abbr: "s",
-//     wind_direction_compass: "E",
-//     created: "2018-07-11T20:53:03.947390Z",
-//     applicable_date: "2018-07-13",
-//     min_temp: 15.5525,
-//     max_temp: 25.3475,
-//     the_temp: 24.175,
-//     wind_speed: 3.6572546846814604,
-//     wind_direction: 90.32910675612557,
-//     air_pressure: 1025.385,
-//     humidity: 57,
-//     visibility: 10.181166984808717,
-//     predictability: 73  
-//   },
-//   { id: 6696130918219776,
-//     weather_state_name: "Heavy Cloud",
-//     weather_state_abbr: "hc",
-//     wind_direction_compass: "SSW",
-//     created: "2018-07-11T20:53:04.068570Z",
-//     applicable_date: "2018-07-14",
-//     min_temp: 15.915,
-//     max_temp: 27.0925,
-//     the_temp: 26.585,
-//     wind_speed: 3.649847972759087,
-//     wind_direction: 200.04283406736377,
-//     air_pressure: 1024.4450000000002,
-//     humidity: 52,
-//     visibility: 11.14056410562316,
-//     predictability: 71
-//   },
-// ],
+const weather = [
+  { id: 5743823523151872,
+    weather_state_name: "Light Cloud",
+    weather_state_abbr: "lc",
+    wind_direction_compass: "NNE",
+    created: "2018-07-11T20:53:03.251710Z",
+    applicable_date: "2018-07-11",
+    min_temp: 14.43,
+    max_temp: 23.36,
+    the_temp: 22.785,
+    wind_speed: 5.682503989556987,
+    wind_direction: 21.6264939172659,
+    air_pressure: 1024.45,
+    humidity: 58,
+    visibility: 8.683041040324504,
+    predictability: 70
+  },
+  { id: 6188149969518592,
+    weather_state_name: "Heavy Cloud",
+    weather_state_abbr: "hc",
+    wind_direction_compass: "NE",
+    created: "2018-07-11T20:53:03.268190Z",
+    applicable_date: "2018-07-12",
+    min_temp: 14.81,
+    max_temp: 25.52,
+    the_temp: 24.61,
+    wind_speed: 3.2461141472739206,
+    wind_direction: 42.72552812997726,
+    air_pressure: 1024.605,
+    humidity: 54,
+    visibility: 10.633835898353615,
+    predictability: 71
+  },
+  { id: 5742049676492800,
+    weather_state_name: "Showers",
+    weather_state_abbr: "s",
+    wind_direction_compass: "E",
+    created: "2018-07-11T20:53:03.947390Z",
+    applicable_date: "2018-07-13",
+    min_temp: 15.5525,
+    max_temp: 25.3475,
+    the_temp: 24.175,
+    wind_speed: 3.6572546846814604,
+    wind_direction: 90.32910675612557,
+    air_pressure: 1025.385,
+    humidity: 57,
+    visibility: 10.181166984808717,
+    predictability: 73  
+  },
+  { id: 6696130918219776,
+    weather_state_name: "Heavy Cloud",
+    weather_state_abbr: "hc",
+    wind_direction_compass: "SSW",
+    created: "2018-07-11T20:53:04.068570Z",
+    applicable_date: "2018-07-14",
+    min_temp: 15.915,
+    max_temp: 27.0925,
+    the_temp: 26.585,
+    wind_speed: 3.649847972759087,
+    wind_direction: 200.04283406736377,
+    air_pressure: 1024.4450000000002,
+    humidity: 52,
+    visibility: 11.14056410562316,
+    predictability: 71
+  }
+]
 
 // //using a higher order function, create an array of the unique 'weather_state_name' values of the weather array. Your function should return the following array ['Light Cloud', 'Heavy Cloud', 'Showers']
-// const weatherStates = 
-// console.log(weatherStates)
+const weathers = (input, field) => {
+  let output = []
+  for(let w=0; w < input.length; w++){
+    output.push(input[w][field])
+
+  }
+  return output
+
+}
+console.log(weathers(weather, 'weather_state_name'))
 
 // //find the id of the object in weather that has a min_temp of 15.915
 
