@@ -32,18 +32,12 @@ sumEvens(strNums)
 /////////////////////////////
 /////////////////////////////
 // Find the index of the first value when added to it's index = 512 (#ATX!!)
-const atxIdx = (array) => {
-  for(let i=0; i < array.length; i++){
-    let eye = array[i];
-    let indexEye = array.indexOf(array[i]);
-    if(eye + indexEye == 512){
-      console.log('made it')
-      // console.log(`number ${eye} + index ${indexEye}`);
+// reduce
 
-    } 
-  }
+const atxIdx = (number) => {
+  return number == 512
 }
-atxIdx(strNums)
+console.log(newArray.findIndex(atxIdx))
 
   
 
