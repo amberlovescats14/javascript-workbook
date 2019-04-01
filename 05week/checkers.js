@@ -144,9 +144,13 @@ class Game {
     this.black = 'B'
     this.red = 'R'
     this.turn = this.black;
+    this.blackAmount = 12;
+    this.redAmount = 12
 
   }
+
   start() {
+
     this.board.createGrid();
     this.board.setBoard();
   }
@@ -154,8 +158,11 @@ class Game {
   moveChecker(whichPiece, toWhere) {
     // console.log('top of moveChecker', playerTurn)
     if (this.isValid(whichPiece)) {
+      console.log(1)
       if (this.oneSpace(whichPiece, toWhere)) {
+        console.log(2)
         if (this.selectChecker(whichPiece)) {
+          console.log(3)
           let start = whichPiece.split('')
           let startRow = start[0]
           let startCol = start[1]
@@ -165,9 +172,19 @@ class Game {
           const movingPiece = this.board.grid[startRow][startCol];
           this.board.grid[endRow][endColumn] = movingPiece;
           this.board.grid[startRow][startCol] = null;
-          console.log("hello");
-          
+          // console.log("hello");
+
         }
+      } else if (this.jumpLogic(whichPiece, toWhere)) {
+        let start = whichPiece.split('')
+        let startRow = start[0]
+        let startCol = start[1]
+        let endSpot = toWhere.split('')
+        let endColumn = endSpot[1]
+        let endRow = endSpot[0]
+        const movingPiece = this.board.grid[startRow][startCol];
+        this.board.grid[endRow][endColumn] = movingPiece;
+        this.board.grid[startRow][startCol] = null;
       }
     }
     this.switchPlayers();
@@ -180,8 +197,8 @@ class Game {
     let startCol = start[1];
     // console.log('board', this.board)
     const startPiece = this.board.grid[startRow][startCol]
-    console.log("playerTurn:" + this.turn)
-    if (((startPiece.symbol === this.red) && (this.turn === this.red)) || ((startPiece.symbol=== this.black) && (this.turn  === this.black))) {
+    // console.log("playerTurn:" + this.turn)
+    if (((startPiece.symbol === this.red) && (this.turn === this.red)) || ((startPiece.symbol === this.black) && (this.turn === this.black))) {
       return true
     } else {
       console.log('Not your turn!')
@@ -209,11 +226,13 @@ class Game {
     }
   }
   switchPlayers() {
-     return (this.turn === this.black) ? this.turn = this.red : this.turn = this.black;
-    
-    console.log(`Player ${this.turn}'s turn`)
+    // console.log(`Player ${this.turn}'s turn`)
+
+    return (this.turn === this.black) ? this.turn = this.red : this.turn = this.black;
+
   }
   oneSpace(whichPiece, toWhere) {
+    let number = parseInt(whichPiece)
     let start = whichPiece.split('')
     let startRow = start[0]
     let startCol = start[1]
@@ -222,56 +241,135 @@ class Game {
     let endRow = endSpot[0]
     const movingPiece = this.board.grid[startRow][startCol]
     if (this.board.grid[endRow][endColumn] === null) {
-      // console.log('in oneSpace', this.board.grid[endRow][endColumn])
-      return true
+      console.log(number - 9)
+      if (this.rules(whichPiece, toWhere)) {
+        return true
+      } //! GETTING STUCK IN THIS FALSE
     } else {
-      console.log('cannot move here')
+      return false
     }
   }
-}
+  // endSpot would have to be null
+  // +9 or +11 would have to be filled with the opposite playerTurn
+  // the spot moving to would have to be +18 +22
+  // this .turn === this.red
 
-function getPrompt() {
-  game.board.viewGrid();
-  rl.question('which piece?: ', (whichPiece) => {
-    rl.question('to where?: ', (toWhere) => {
-      game.moveChecker(whichPiece, toWhere);
-      getPrompt();
-    });
-  });
-}
+  jumpLogic(whichPiece, toWhere) {
+    let numberStart = parseInt(whichPiece)
+    let numberEnd = parseInt(toWhere)
+    ////////////
+    let blackLeft = numberStart - 9
+    let blackLeftKill = blackLeft.toString().split('').map(Number)
+    let blackKillRowLeft = blackLeftKill[0]
+    let blackKillColumnLeft = blackLeftKill[1]
+    /////////////
+    let blackRight = numberStart - 11
+    let blackRightKill = blackRight.toString().split('').map(Number)
+    let blackKillRowRight = blackRightKill[0]
+    let blackKillColumnRight = blackRightKill[1]
+    /////////////
+    let redLeft = numberStart + 9
+    let redLeftKill = redLeft.toString().split('').map(Number)
+    let redKillRowLeft = redLeftKill[0]
+    let redKillColumnLeft = redLeftKill[1]
+    //////////////////
+    let redRight = numberStart + 11
+    let redRightKill = redRight.toString().split('').map(Number)
+    let redKillRowRight = redRightKill[0]
+    let redKillColumnRight = redRightKill[1]
 
-const game = new Game();
-game.start();
+    if (this.turn === this.black) {
+      if (numberEnd === numberStart - 18) {
+        if (this.board.grid[blackKillRowLeft][blackKillColumnLeft] === this.red) {
+          this.board.grid[blackKillRowLeft][blackKillColumnLeft] = null;
+          this.redAmount--
+          return true
+        }
+      } else if (numberEnd === numberStart - 22) {
+        if (this.board.grid[blackKillRowRight][blackKillColumnRight] === this.red) {
+          this.board.grid[blackKillRowLeft][blackKillColumnLeft] = null;
+          this.redAmount--
+          return true
+        }
+      } else if (numberEnd === numberStart + 18) {
+        if (this.board.grid[redKillRowLeft][redKillColumnLeft] === this.black) {
+          this.board.grid[redKillRowLeft][redKillColumnLeft] = null;
+          this.blackAmount--
+          return true
+        }
+      } else if (numberEnd === numberStart + 22) {
+        if (this.board.grid[redKillRowRight][redKillColumnRight] === this.black) {
+          this.board.grid[redKillRowRight][redKillColumnRight] = null;
+          this.blackAmount--
+          return true
+        }
+      }
+      else {
+        return false
+      }
+    }
+
+    }
+    rules(whichPiece, toWhere) {
+      let numberStart = parseInt(whichPiece)
+      let numberEnd = parseInt(toWhere)
+      if (this.turn === this.black) {
+        if ((numberEnd === numberStart - 9) || (numberEnd === numberStart - 11)) {
+          return true
+        } 
+      } else if (this.turn === this.red) {
+        if ((numberEnd === numberStart + 9) || (numberEnd === numberStart + 11)) {
+          return true
+        } 
+
+      } else {
+        return false
+      }
+    }
+  }
+
+  function getPrompt() {
+    game.board.viewGrid();
+    rl.question('which piece?: ', (whichPiece) => {
+      rl.question('to where?: ', (toWhere) => {
+        game.moveChecker(whichPiece, toWhere);
+        getPrompt();
+      });
+    });
+  }
+
+  const game = new Game();
+  game.start();
 
 
-// Tests
-if (typeof describe === 'function') {
-  describe('Game', () => {
-    it('should have a board', () => {
-      assert.equal(game.board.constructor.name, 'Board');
+  // Tests
+  if (typeof describe === 'function') {
+    describe('Game', () => {
+      it('should have a board', () => {
+        assert.equal(game.board.constructor.name, 'Board');
+      });
+      it('board should have 24 checkers', () => {
+        assert.equal(game.board.checkers.length, 24);
+      });
     });
-    it('board should have 24 checkers', () => {
-      assert.equal(game.board.checkers.length, 24);
-    });
-  });
 
-  describe('Game.moveChecker()', () => {
-    it('should move a checker', () => {
-      assert(!game.board.grid[4][1]);
-      game.moveChecker('50', '41');
-      assert(game.board.grid[4][1]);
-      game.moveChecker('21', '30');
-      assert(game.board.grid[3][0]);
-      game.moveChecker('52', '43');
-      assert(game.board.grid[4][3]);
+    describe('Game.moveChecker()', () => {
+      it('should move a checker', () => {
+        assert(!game.board.grid[4][1]);
+        game.moveChecker('50', '41');
+        assert(game.board.grid[4][1]);
+        game.moveChecker('21', '30');
+        assert(game.board.grid[3][0]);
+        game.moveChecker('52', '43');
+        assert(game.board.grid[4][3]);
+      });
+      it('should be able to jump over and kill another checker', () => {
+        game.moveChecker('30', '52');
+        assert(game.board.grid[5][2]);
+        assert(!game.board.grid[4][1]);
+        assert.equal(game.board.checkers.length, 23);
+      });
     });
-    it('should be able to jump over and kill another checker', () => {
-      game.moveChecker('30', '52');
-      assert(game.board.grid[5][2]);
-      assert(!game.board.grid[4][1]);
-      assert.equal(game.board.checkers.length, 23);
-    });
-  });
-} else {
-  getPrompt();
-}
+  } else {
+    getPrompt();
+  }
