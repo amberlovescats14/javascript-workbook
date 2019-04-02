@@ -143,6 +143,62 @@ class Game {
     this.board.createGrid();
     this.board.setBoard();
   }
+  moveChecker(whichPiece, toWhere){
+    let number = parseInt(whichPiece)
+    let start = whichPiece.split('')
+    let startRow = start[0]
+    let startCol = start[1]
+    let endSpot = toWhere.split('')
+    let endColumn = endSpot[1]
+    let endRow = endSpot[0]
+    const movingPiece = this.board.grid[startRow][startCol]
+    if(this.validInput(whichPiece)){
+      if (this.board.grid[endRow][endColumn] === null){
+        if(this.rules(whichPiece, toWhere)){
+          return true
+        }
+      }
+    }
+    actuallyMove(whichPiece, toWhere)
+  }
+
+  validInput(whichPiece) {
+    let reg = new RegExp(/[0-7]{2}/g)
+    let testing = reg.test(whichPiece)
+    if (testing) {
+      return true
+    } else {
+      console.log('incorrect input')
+      return false
+    }
+  }
+
+  rules(whichPiece, toWhere) {
+    let numberStart = parseInt(whichPiece)
+    let numberEnd = parseInt(toWhere)
+    if (this.turn === this.black) {
+      if ((numberEnd === numberStart - 9) || (numberEnd === numberStart - 11)) {
+        return true //! i want to put the acual movment in here
+      } else if((numberEnd === numberStart - 18) || (numberEnd === numberStart - 22)){
+        return true
+      }
+    } else if (this.turn === this.red) {
+      if ((numberEnd === numberStart + 9) || (numberEnd === numberStart + 11)) {
+        return true
+      } else if((numberEnd === numberStart + 18) || (numberEnd === numberStart + 22)){
+        return true
+      }
+
+    } else {
+      return false
+    }
+  }
+
+  actuallyMove(whichPiece, toWhere){
+
+  }
+
+
 
   }
 
