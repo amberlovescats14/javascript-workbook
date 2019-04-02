@@ -18,26 +18,33 @@ stringsToNumbs(strNums);
 /////////////////////////////////////////
 // // With the same numbers, find the sum of the even values
 let total = 0
-const sumEvens = (array) => {
-  for(let i=0; i < array.length; i++){
-    parseInt(array[i])
-    if(array[i] % 2 === 0){
-      total += parseInt(array[i])
-    }
+let sumEquals = strNums.map(Number)
+const sums = () => {
+  strNums.forEach(function callback(currentValue[index [numStr]]) {
+    return total += index += currentValue
   }
-  console.log("total:" + total)
-}
+})
+console.log(sums)
+// const sumEvens = (array) => {
+//   for(let i=0; i < array.length; i++){
+//     parseInt(array[i])
+//     if(array[i] % 2 === 0){
+//       total += parseInt(array[i])
+//     }
+//   }
+//   console.log("total:" + total)
+// }
 
-sumEvens(strNums)
+// sumEvens(strNums)
 /////////////////////////////
 /////////////////////////////
 // Find the index of the first value when added to it's index = 512 (#ATX!!)
 // reduce
 
-const atxIdx = (number) => {
-  return number == 512
-}
-console.log(newArray.findIndex(atxIdx))
+// const atxIdx = (number) => {
+//   return number == 512
+// }
+// console.log(newArray.findIndex(atxIdx))
 
   
 
