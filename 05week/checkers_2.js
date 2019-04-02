@@ -143,7 +143,7 @@ class Game {
     this.board.createGrid();
     this.board.setBoard();
   }
-  moveChecker(whichPiece, toWhere){
+  moveChecker(whichPiece, toWhere) {
     let number = parseInt(whichPiece)
     let start = whichPiece.split('')
     let startRow = start[0]
@@ -152,98 +152,258 @@ class Game {
     let endColumn = endSpot[1]
     let endRow = endSpot[0]
     const movingPiece = this.board.grid[startRow][startCol]
-    if(this.validInput(whichPiece)){
-      if (this.board.grid[endRow][endColumn] === null){
-        if(this.rules(whichPiece, toWhere)){
-          return true
-        }
+
+
+    let numberStart = Number(whichPiece)
+    let numberEnd = Number(toWhere)
+
+
+    /////////////////////////////////
+    //for jumping purpose
+    ////////////
+    let blackLeft = numberStart - 9
+    let blackLeftKill = blackLeft.toString().split('').map(Number)
+    let blackKillRowLeft = blackLeftKill[0]
+    let blackKillColumnLeft = blackLeftKill[1]
+    /////////////
+    let blackRight = numberStart - 11
+    let blackRightKill = blackRight.toString().split('').map(Number)
+    let blackKillRowRight = blackRightKill[0]
+    let blackKillColumnRight = blackRightKill[1]
+    /////////////
+    let redLeft = numberStart + 9
+    let redLeftKill = redLeft.toString().split('').map(Number)
+    let redKillRowLeft = redLeftKill[0]
+    let redKillColumnLeft = redLeftKill[1]
+    //////////////////
+    let redRight = numberStart + 11
+    let redRightKill = redRight.toString().split('').map(Number)
+    let redKillRowRight = redRightKill[0]
+    let redKillColumnRight = redRightKill[1]
+
+    if (validInput()) {
+      // console.log(1)
+      if (this.turn === this.black) {
+        // console.log(2)
+        blackRules()
+      } else {
+        // console.log(3)
+        redRules()
+      }
+      
+    }
+
+    function validInput() {
+      let reg = new RegExp(/[0-7]{2}/g)
+      let testing = reg.test(whichPiece)
+      if (testing) {
+        return true
+      } else {
+        console.log('incorrect input')
+        return false
       }
     }
-    actuallyMove(whichPiece, toWhere)
-  }
 
-  validInput(whichPiece) {
-    let reg = new RegExp(/[0-7]{2}/g)
-    let testing = reg.test(whichPiece)
-    if (testing) {
-      return true
-    } else {
-      console.log('incorrect input')
-      return false
+    function movePiece() {
+      this.board.grid[endRow][endColumn] = movingPiece;
+      this.board.grid[startRow][startCol] = null;
+      switchPlayer()
     }
-  }
 
-  rules(whichPiece, toWhere) {
-    let numberStart = parseInt(whichPiece)
-    let numberEnd = parseInt(toWhere)
-    if (this.turn === this.black) {
+    function switchPlayer() {
+      this.turn === this.black ? this.red : this.black;
+    }
+
+    function blackRules() {
+  
+      console.log(numberStart - 9)
       if ((numberEnd === numberStart - 9) || (numberEnd === numberStart - 11)) {
-        return true //! i want to put the acual movment in here
-      } else if((numberEnd === numberStart - 18) || (numberEnd === numberStart - 22)){
-        return true
+        console.log(1)
+        movePiece()
+      } else {
+        console.log(2)
+        blackJumpRules()
       }
-    } else if (this.turn === this.red) {
-      if ((numberEnd === numberStart + 9) || (numberEnd === numberStart + 11)) {
-        return true
-      } else if((numberEnd === numberStart + 18) || (numberEnd === numberStart + 22)){
-        return true
-      }
-
-    } else {
-      return false
     }
+
+    function blackJumpRules() {
+      if (numberEnd === numberStart - 18) {
+        if (this.board.grid[blackKillRowLeft][blackKillColumnLeft] === this.red) {
+          this.board.grid[blackKillRowLeft][blackKillColumnLeft] = null;
+          this.redAmount--
+          movePiece()
+        }
+      } else if (numberEnd === numberStart - 22) {
+        if (this.board.grid[blackKillRowRight][blackKillColumnRight] === this.red) {
+          this.board.grid[blackKillRowLeft][blackKillColumnLeft] = null;
+          this.redAmount--
+          movePiece()
+        }
+      } else {
+        return false
+      }
+    }
+
+    function redRules() {
+      if ((numberEnd === numberStart + 9) || (numberEnd === numberStart + 11)) {
+        movePiece()
+      } else {
+        redJumpRules()
+      }
+    }
+
+    function redJumpRules() {
+      if (numberEnd === numberStart + 18) {
+        if (this.board.grid[redKillRowLeft][redKillColumnLeft] === this.black) {
+          this.board.grid[redKillRowLeft][redKillColumnLeft] = null;
+          this.blackAmount--
+          movePiece()
+        }
+      } else if (numberEnd === numberStart + 22) {
+        if (this.board.grid[redKillRowRight][redKillColumnRight] === this.black) {
+          this.board.grid[redKillRowRight][redKillColumnRight] = null;
+          this.blackAmount--
+          movePiece()
+        }
+      } else {
+        return false
+      }
+
+    }
+
   }
 
-  actuallyMove(whichPiece, toWhere){
-
-  }
 
 
 
-  }
 
-  function getPrompt() {
-    game.board.viewGrid();
-    rl.question('which piece?: ', (whichPiece) => {
-      rl.question('to where?: ', (toWhere) => {
-        game.moveChecker(whichPiece, toWhere);
-        getPrompt();
-      });
+
+
+  //! if black use black rules... use an if else to see if its a single space move, if its a double space move then we need to use jumpRules
+  // if (validInput(whichPiece)) {
+  //   if ((numberEnd === numberStart - 9) || (numberEnd === numberStart - 11)) {
+  //     this.board.grid[endRow][endColumn] = movingPiece;
+  //     this.board.grid[startRow][startCol] = null;
+  //     this.switchPlayer()
+  //   } else if ((numberEnd === numberStart + 9) || (numberEnd === numberStart + 11)) {
+  //     this.board.grid[endRow][endColumn] = movingPiece;
+  //     this.board.grid[startRow][startCol] = null;
+  //     this.switchPlayer()
+  //   } else if ((numberEnd === numberStart + 18) || (numberEnd === numberStart + 22)) {
+  //     this.board.grid[endRow][endColumn] = movingPiece;
+  //     this.board.grid[startRow][startCol] = null;
+  //     this.board.grid[blackKillRowLeft][blackKillColumnLeft] = null;
+  //     this.redAmount--
+  //     this.switchPlayer()
+
+  //   }
+  // moveChecker(whichPiece, toWhere) {
+  //     let number = parseInt(whichPiece)
+  //     let start = whichPiece.split('')
+  //     let startRow = start[0]
+  //     let startCol = start[1]
+  //     let endSpot = toWhere.split('')
+  //     let endColumn = endSpot[1]
+  //     let endRow = endSpot[0]
+  //     const movingPiece = this.board.grid[startRow][startCol]
+  //     let numberStart = parseInt(whichPiece)
+  //     let numberEnd = parseInt(toWhere)
+  //     if (this.validInput(whichPiece)) {
+  //       if (this.board.grid[endRow][endColumn] === null) {
+  //         if (this.turn === this.black) {
+  //           if ((numberEnd === numberStart - 9) || (numberEnd === numberStart - 11)) {
+  //             this.board.grid[endRow][endColumn] = movingPiece;
+  //             this.board.grid[startRow][startCol] = null;
+  //             this.switchPlayer()
+  //           } else if (this.turn === this.red) {
+  //             if ((numberEnd === numberStart + 9) || (numberEnd === numberStart + 11)) {
+  //               this.board.grid[endRow][endColumn] = movingPiece;
+  //               this.board.grid[startRow][startCol] = null;
+  //             }
+  //           }
+
+  //         }
+
+  //         validInput(whichPiece) {
+  //           let reg = new RegExp(/[0-7]{2}/g)
+  //           let testing = reg.test(whichPiece)
+  //           if (testing) {
+  //             return true
+  //           } else {
+  //             console.log('incorrect input')
+  //             return false
+  //           }
+  //         }
+
+  //         rules(whichPiece, toWhere) {
+  //           let numberStart = parseInt(whichPiece)
+  //           let numberEnd = parseInt(toWhere)
+  //           if (this.turn === this.black) {
+  //             if ((numberEnd === numberStart - 9) || (numberEnd === numberStart - 11)) {
+  //               return true //! i want to put the acual movment in here
+  //             } else if ((numberEnd === numberStart - 18) || (numberEnd === numberStart - 22)) {
+  //               return true
+  //             }
+  //           } else if (this.turn === this.red) {
+  //             if ((numberEnd === numberStart + 9) || (numberEnd === numberStart + 11)) {
+  //               return true
+  //             } else if ((numberEnd === numberStart + 18) || (numberEnd === numberStart + 22)) {
+  //               return true
+  //             }
+
+  //           } else {
+  //             return false
+  //           }
+  //         }
+
+
+
+}
+
+
+
+function getPrompt() {
+  game.board.viewGrid();
+  rl.question('which piece?: ', (whichPiece) => {
+    rl.question('to where?: ', (toWhere) => {
+      game.moveChecker(whichPiece, toWhere);
+      getPrompt();
     });
-  }
+  });
+}
 
-  const game = new Game();
-  game.start();
+const game = new Game();
+game.start();
 
 
-  // Tests
-  if (typeof describe === 'function') {
-    describe('Game', () => {
-      it('should have a board', () => {
-        assert.equal(game.board.constructor.name, 'Board');
-      });
-      it('board should have 24 checkers', () => {
-        assert.equal(game.board.checkers.length, 24);
-      });
+// Tests
+if (typeof describe === 'function') {
+  describe('Game', () => {
+    it('should have a board', () => {
+      assert.equal(game.board.constructor.name, 'Board');
     });
-
-    describe('Game.moveChecker()', () => {
-      it('should move a checker', () => {
-        assert(!game.board.grid[4][1]);
-        game.moveChecker('50', '41');
-        assert(game.board.grid[4][1]);
-        game.moveChecker('21', '30');
-        assert(game.board.grid[3][0]);
-        game.moveChecker('52', '43');
-        assert(game.board.grid[4][3]);
-      });
-      it('should be able to jump over and kill another checker', () => {
-        game.moveChecker('30', '52');
-        assert(game.board.grid[5][2]);
-        assert(!game.board.grid[4][1]);
-        assert.equal(game.board.checkers.length, 23);
-      });
+    it('board should have 24 checkers', () => {
+      assert.equal(game.board.checkers.length, 24);
     });
-  } else {
-    getPrompt();
-  }
+  });
+
+  describe('Game.moveChecker()', () => {
+    it('should move a checker', () => {
+      assert(!game.board.grid[4][1]);
+      game.moveChecker('50', '41');
+      assert(game.board.grid[4][1]);
+      game.moveChecker('21', '30');
+      assert(game.board.grid[3][0]);
+      game.moveChecker('52', '43');
+      assert(game.board.grid[4][3]);
+    });
+    it('should be able to jump over and kill another checker', () => {
+      game.moveChecker('30', '52');
+      assert(game.board.grid[5][2]);
+      assert(!game.board.grid[4][1]);
+      assert.equal(game.board.checkers.length, 23);
+    });
+  });
+} else {
+  getPrompt();
+}
