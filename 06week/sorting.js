@@ -46,13 +46,10 @@ stringsToNumbs(strNums);
 
 const atx = (arr) => {
   for(let i=0; i < arr.length; i++){
-    let indexEye = i;
-    let eye = Number(arr[i])
-    if(eye + indexEye == 512){
+
+    if(i + Number(arr[i]) == 512){
   
-     return `At index ${indexEye} the number is ${eye}  `
-     
-     
+     return "The number at index " + i + " is " + arr[i]
     }
   } 
 }
