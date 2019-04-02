@@ -17,14 +17,17 @@ stringsToNumbs(strNums);
 /////////////////////////////////////////
 /////////////////////////////////////////
 // // With the same numbers, find the sum of the even values
-let total = 0
-let sumEquals = strNums.map(Number)
-const sums = () => {
-  strNums.forEach(function callback(currentValue[index [numStr]]) {
-    return total += index += currentValue
-  }
-})
-console.log(sums)
+// let total = 0
+// let sumEquals = strNums.map(Number)
+// const sums = () => {
+//   strNums.forEach(function callback(currentValue[index [numStr]]) {
+//     return total += index += currentValue
+//   }
+// })
+// console.log(sums)
+
+
+///////////////////
 // const sumEvens = (array) => {
 //   for(let i=0; i < array.length; i++){
 //     parseInt(array[i])
@@ -41,11 +44,19 @@ console.log(sums)
 // Find the index of the first value when added to it's index = 512 (#ATX!!)
 // reduce
 
-// const atxIdx = (number) => {
-//   return number == 512
-// }
-// console.log(newArray.findIndex(atxIdx))
-
+const atx = (arr) => {
+  for(let i=0; i < arr.length; i++){
+    let indexEye = i;
+    let eye = Number(arr[i])
+    if(eye + indexEye == 512){
+  
+     return `At index ${indexEye} the number is ${eye}  `
+     
+     
+    }
+  } 
+}
+console.log(atx(strNums))
   
 
   ////////////////it doesnt exist *** I cant figure out how to get them to add instead of concat
