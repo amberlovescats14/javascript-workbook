@@ -157,6 +157,7 @@ class Game {
 
   moveChecker(whichPiece, toWhere) {
     // console.log('top of moveChecker', playerTurn)
+    
     if (this.isValid(whichPiece)) {
       console.log(1)
       if (this.oneSpace(whichPiece, toWhere)) {
