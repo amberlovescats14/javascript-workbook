@@ -142,7 +142,10 @@ class Game {
 
     this.board.createGrid();
     this.board.setBoard();
+    console.log('TEST: ', this.board.grid);
+
   }
+
   moveChecker(whichPiece, toWhere) {
     let number = parseInt(whichPiece)
     let start = whichPiece.split('')
@@ -185,6 +188,7 @@ class Game {
       // console.log(1)
       if (this.turn === this.black) {
         // console.log(2)
+        console.log('TEST: ', this.board.grid[endRow, endColumn]);
         blackRules()
       } else {
         // console.log(3)
