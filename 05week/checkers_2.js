@@ -142,7 +142,6 @@ class Game {
 
     this.board.createGrid();
     this.board.setBoard();
-    console.log('TEST: ', this.board.grid);
 
   }
 
@@ -188,7 +187,7 @@ class Game {
       // console.log(1)
       if (this.turn === this.black) {
         // console.log(2)
-        console.log('TEST: ', this.board.grid[endRow, endColumn]);
+        // console.log('TEST: ', this.board.grid[endRow, endColumn]);
         blackRules()
       } else {
         // console.log(3)
@@ -220,7 +219,6 @@ class Game {
 
     function blackRules() {
   
-      console.log(numberStart - 9)
       if ((numberEnd === numberStart - 9) || (numberEnd === numberStart - 11)) {
         console.log(1)
         movePiece()
