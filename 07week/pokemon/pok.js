@@ -6,7 +6,6 @@ function getPokemon() {
     })
     .then(function (data) {
       let random = Math.floor(Math.random() * 20)
-      console.log(data.results[random].url)
       return fetch(data.results[random].url)
     })
     .then(function (response) {
