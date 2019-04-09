@@ -1,12 +1,9 @@
-"use strict"
-
-// const assert = require('assert');
+// let assert = require('assert').strict;
 
 //   Im going to create a class that can construct first and last name
 // Then Im going to extend that class with another class for extra values
 // Then one more extend with a static property of the Blue teams color and mascot
 //Then I need to add event listeners to the buttons which will move the innerHTML from one div to another.
-
 
 const arrOfPeople = [
   {
@@ -97,8 +94,7 @@ class RedSpecs {
 }
 
 const listPeopleChoices = () => {
-  const start = document.getElementById('start')
-  start.remove(this);
+  document.getElementById('firstButton').remove(this)
   const listElement = document.getElementById('people')
   arrOfPeople.map(person => {
     const li = document.createElement("li")
@@ -111,6 +107,7 @@ const listPeopleChoices = () => {
     listElement.append(li)
   })
 }
+document.getElementById('firstButton').addEventListener('click', listPeopleChoices)
 
 const makePlayer = (person) => {
   console.log(`li ${person.id} was clicked!`);
@@ -124,7 +121,7 @@ const makePlayer = (person) => {
   li.append(button);
   li.append(button2);
   button.setAttribute('style', "background-color: #33D8FF; margin-left: 10px");
-  button2.setAttribute('style', "background-color: #A70623; margin-left: 10px; color: white");
+  button2.setAttribute('style', "background-color: #A70623; margin-left: 10px");
   button.innerHTML = 'Blue Team';
   button2.innerHTML = 'Red Team'
   button.addEventListener('click', function(){addToBlue(person)});
@@ -155,65 +152,13 @@ function addToRed(person) {
    li.setAttribute('style', "color:#A70623")
 }
 
-// tests
-// if (typeof describe === 'function'){
-//   describe('listOfPeople', function(){
-//     it('should return a persons name and id', function(){
-//       var player7 = new Person('Rick Martinez', '7');
-//       assert.equal(player76.name, 'Rick Martinez');
-//       assert.equal(player7.id, '7');
-//       assert.typeOf('string');
-//     });
 
-
-
-
-
-
-//     it('can enter a ship', function(){
-//       let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit');
-//       let crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry');
-//       crewMember1.enterShip(mav);
-//       assert.equal(crewMember1.ship, mav);
-//       assert.equal(mav.crew.length, 1);
-//       assert.equal(mav.crew[0], crewMember1);
-//     });
-//   });
-
-//   describe('Ship', function(){
-//     it('should have a name, a type, an ability and an empty crew upon instantiation', function(){
-//       let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit');
-//       assert.equal(mav.name, 'Mars Ascent Vehicle');
-//       assert.equal(mav.type, 'MAV');
-//       assert.equal(mav.ability, 'Ascend into low orbit');
-//       assert.equal(mav.crew.length, 0);
-//     });
-
-//     it('can return a mission statement correctly', function(){
-//       let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit');
-//       let crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry');
-//       let hermes = new Ship('Hermes', 'Main Ship', 'Interplanetary Space Travel');
-//       let crewMember2 = new CrewMember('Commander Lewis', 'commander', 'geology');
-//       assert.equal(mav.missionStatement(), "Can't perform a mission yet.");
-//       assert.equal(hermes.missionStatement(), "Can't perform a mission yet.");
-
-//       crewMember1.enterShip(mav);
-//       assert.equal(mav.missionStatement(), "Ascend into low orbit");
-
-//       crewMember2.enterShip(hermes);
-//       assert.equal(hermes.missionStatement(), "Interplanetary Space Travel");
-//     });
-//   });
-// }
-
-
-
-
-
-
-
-
-
-
-
-
+//tests
+if(typeof describe === 'function'){
+  describe('listPeopleChoices', function(){
+    it('should create a new person'), function(){
+      var player2 = new Person('Mary Moreno', 10);
+      assert.equal(player2.name, 'Mary Moreno')
+    }
+  })
+}
