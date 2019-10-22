@@ -19,23 +19,57 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-function movePiece() {
-  // Your code here
-
+function movePiece(startStack, endStack) {
+    let block = stacks[startStack].pop()
+    
+    stacks[endStack].push(block)
+  
 }
 
-function isLegal() {
-  // Your code here
-
+function isLegal(startStack, endStack) {
+  console.log("StartStackValue:" + stacks[startStack][stacks[startStack].length-1])
+  console.log("EndStackValue:" + stacks[endStack][stacks[endStack].length-1])
+  if((startStack === 'a' || startStack === 'b' || startStack === 'c') && (endStack === 'a' || endStack === 'b'|| endStack === 'c')
+  ){
+    if((stacks[startStack][stacks[startStack].length-1] < stacks[endStack][stacks[endStack].length-1]) || (stacks[endStack][stacks[endStack].length-1] === undefined) ){
+      return true
+    }  else {
+      return false
+    }
+  } else {
+    console.log('incorrect input')
+    return false
+  }
 }
 
-function checkForWin() {
-  // Your code here
+function checkForWin(startStack, endStack) {
+  console.log('c stack', stacks[endStack])
+  if((stacks['b']).length
+     === 4){
+    return true 
+  } else {
+    return false 
+  }
+  // // console.log(stacks)
+  // if (stacks === { a: [], b: [], c: [4, 3, 2, 1] }){
+  //   return true
+  // } else {
+  //   return false
+  // }
+
 
 }
 
 function towersOfHanoi(startStack, endStack) {
-  // Your code here
+  if(isLegal(startStack, endStack)){
+      movePiece(startStack, endStack)
+   if(checkForWin(startStack, endStack)){
+     console.log('WINNER')
+   }
+  } else {
+    console.log('illegal move')
+  }
+
 
 }
 
