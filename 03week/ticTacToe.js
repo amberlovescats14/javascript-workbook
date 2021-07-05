@@ -24,23 +24,110 @@ function printBoard() {
 }
 
 function horizontalWin() {
-  // Your code here
+  if((board[0][0] === 'X') && (board[0][1] === 'X') && (board[0][2] === 'X')){
+    return true
+  } else if ((board[1][0] === 'X') && (board[1][1] === 'X') && (board[1][2] === 'X')){
+    return true
+  } else if ((board[2][0] === 'X') && (board[2][1] === 'X') && (board[2][2] === 'X')){
+    return true
+  } else   if((board[0][0] === 'O') && (board[0][1] === 'O') && (board[0][2] === 'O')){
+    return true
+  } else if ((board[1][0] === 'O') && (board[1][1] === 'O') && (board[1][2] === 'O')){
+    return true
+  } else if ((board[2][0] === 'O') && (board[2][1] === 'O') && (board[2][2] === 'O')){
+    return true
+  } else {
+    return false
+  } 
 }
 
 function verticalWin() {
-  // Your code here
+  if((board[0][0] === 'X') && (board[1][0] === 'X') && (board[2][0] === 'X')) {
+    return true
+  }
+  else if((board[0][1] == 'X') && (board[1][1] == 'X') && (board[2][1] == 'X')){
+    return true
+  }   else if((board[0][2] === 'X') && (board[1][2] === 'X') && (board[2][2] === 'X')){
+    return true
+  }  else if((board[0][0] === 'O') && (board[1][0] === 'O') && (board[2][0] === 'O')) {
+    return true
+  }
+  else if((board[0][1] == 'O') && (board[1][1] == 'O') && (board[2][1] == 'O')){
+    return true
+  }   else if((board[0][2] === 'O') && (board[1][2] === 'O') && (board[2][2] === 'O')){
+    return true
+  } else {
+    return false
+  }
 }
 
 function diagonalWin() {
-  // Your code here
+  if((board[0][0] === 'X') && (board[1][1] === 'X') && (board[2][2] === 'X')){
+  return true
+} else if((board[0][2] === 'X') && (board[1][1] === 'X') && (board[2][0] === 'X')){
+  return true
+} else if((board[0][0] === 'O') && (board[1][1] === 'O') && (board[2][2] === 'O')){
+  return true
+} else if((board[0][2] === 'O') && (board[1][1] === 'O') && (board[2][0] === 'O')){
+  return true
+} else {
+  return false
+}
 }
 
 function checkForWin() {
-  // Your code here
-}
+  if(verticalWin()){
+    console.log(`${playerTurn} wins!`)
+    return true
+  } else if (horizontalWin()){
+    console.log(`${playerTurn} wins!`)
+    return true
+  } else if(diagonalWin()){
+    console.log(`${playerTurn} wins!`)
+    return true
+  } else {
+    return false
+  }
 
+}
+function movePiece(row, column){
+    playerTurn === 'X'
+    board[row][column] = playerTurn;
+ 
+}
+function whoseTurn() {
+  if (playerTurn === 'X'){
+    playerTurn = 'O'
+  } else {
+    playerTurn = 'X'
+  }
+}
+function correctInput(row, column){
+  if(((row === '0') || (row === '1') || (row === '2'))&&((column === '0') ||(column === '1') || (column === '2'))){
+    // console.log(true)
+    return true 
+  } else {
+    // console.log(row + " " + column )
+    // console.log(false)
+    return false
+  }
+}
+function isEmpty(row, column) {
+  if(board[row][column] === ' '){
+    return true
+  } else {
+    return false
+  }
+}
 function ticTacToe(row, column) {
-  // Your code here
+  if(isEmpty(row, column) && correctInput(row,column)){
+  movePiece(row, column)
+    if(checkForWin()){
+  console.log(`${playerTurn} wins!`)
+    }else {
+    whoseTurn()
+    }
+  }else console.log('input invalid')
 }
 
 function getPrompt() {
@@ -52,7 +139,7 @@ function getPrompt() {
       getPrompt();
     });
   });
-
+    
 }
 
 
